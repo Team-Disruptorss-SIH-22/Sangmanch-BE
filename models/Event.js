@@ -21,6 +21,10 @@ const schema = mongoose.Schema({
 			"exhibition"
 		]
 	},
+	date: {
+		type: Date,
+		required: true
+	},
 	peopleReached: {
 		type: Number,
 		required: true
@@ -41,12 +45,16 @@ const schema = mongoose.Schema({
 	status: {
 		type: Number,
 		required: true,
+		// { Pending, Rejected, Approved }
 		enum: [-1, 0, 1]
 	},
 	forwardToGA: {
-		type: Number,
-		required: true,
-		enum: [-1, 0, 1]
+		type: Boolean,
+		default: false
+	},
+	invoice: {
+		type: String,
+		required: true
 	}
 });
 
