@@ -12,14 +12,7 @@ const schema = mongoose.Schema({
 	type: {
 		type: String,
 		required: true,
-		enum: [
-			"scholarship",
-			"festival",
-			"seminar",
-			"languageFest",
-			"CulturalFest",
-			"exhibition"
-		]
+		enum: ["scholarship", "festival", "seminar", "languageFest", "CulturalFest", "exhibition"]
 	},
 	date: {
 		type: Date,
@@ -46,7 +39,8 @@ const schema = mongoose.Schema({
 		type: Number,
 		required: true,
 		// { Pending, Rejected, Approved }
-		enum: [-1, 0, 1]
+		enum: [-1, 0, 1],
+		default: -1
 	},
 	forwardToGA: {
 		type: Boolean,

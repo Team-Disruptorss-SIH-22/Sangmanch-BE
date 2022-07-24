@@ -3,12 +3,15 @@ const Router = express.Router();
 const {
 	createEvent,
 	getAllEvents,
-	getEventByID
+	getEventByID,
+	getEventsOfLoggedUser
 } = require("../controllers/eventController");
-const { protect } = require("../controllers/authController");
+const { protect, roles } = require("../controllers/authController");
 
-Router.use(authController.protect);
-Router.route("/").get(getAllEvents).post(createEvent);
+Router.use(protect);
+Router.get("/", roles("ICCRUser"), getEventsOfLoggedUser);
+Router.get("/all", roles("financeManager", "governingBody", "generalAssembly"), getAllEvents);
+Router.post("/", roles("ICCRUser"), createEvent);
 Router.post("/:id").get(getEventByID);
 
 module.exports = Router;
