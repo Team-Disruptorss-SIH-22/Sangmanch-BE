@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
+	name: String,
 	email: {
 		type: String,
 		required: [true, "Please provide an email"],
@@ -24,9 +25,28 @@ const schema = mongoose.Schema({
 	},
 	role: {
 		type: String,
-		enum: ["ICCRUser", "financeManager", "governingBody", "generalAssembly"]
+		enum: ["ICCRUser", "financeManager", "governingBody", "generalAssembly"],
+		required: true
+	},
+	confirm: {
+		type: Boolean,
+		default: false
 	}
 });
+
+// Encrypting password before saving
+schema.pre("save", async function (next) {
+	if (!this.isModified("password")) return next();
+	this.password = await bcrypt.hash(this.password, 10);
+	this.confirmPassword = undefined;
+
+	next();
+});
+
+// Verify Password
+schema.methods.verifyPassword = async function (candidatePassword, password) {
+	return await bcrypt.compare(candidatePassword, password);
+};
 
 const model = mongoose.model("User", schema);
 module.exports = model;
