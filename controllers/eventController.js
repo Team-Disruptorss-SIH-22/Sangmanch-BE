@@ -9,9 +9,8 @@ exports.createEvent = async (req, res) => {
 	try {
 		const userID = req.user;
 		const { name, type, date, peopleReached, expenses, budget, city, country, status } = req.body;
-		console.log(userID);
 		// Get Cloudinary Link for Invoice
-		// const invoice = await cloudinaryLink(req.file.path).url;
+		const invoice = (await cloudinaryLink(req.file.path)).url;
 		const event = await Event.create({
 			userID,
 			name,
@@ -22,8 +21,8 @@ exports.createEvent = async (req, res) => {
 			budget,
 			city,
 			country,
-			status
-			// invoice
+			status,
+			invoice
 		});
 
 		res.status(201).json({
