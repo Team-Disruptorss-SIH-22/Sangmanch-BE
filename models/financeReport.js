@@ -13,7 +13,7 @@ const schema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	flag: {
+	status: {
 		type: Boolean,
 		required: true,
 		default: false
