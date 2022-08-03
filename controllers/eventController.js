@@ -1,4 +1,8 @@
 const Event = require("../models/Event");
+const User = require("../models/User");
+const FinanceReport = require("../models/FinanceReport");
+const GoverningBodyReport = require("../models/GoverningBodyReport");
+
 const { cloudinaryLink } = require("../utils/Upload");
 
 exports.createEvent = async (req, res) => {
@@ -115,6 +119,49 @@ exports.getEventsOfLoggedUser = async (req, res) => {
 			status: "success",
 			data: {
 				events
+			}
+		});
+	} catch (err) {
+		console.log(err.message);
+		res.status(400).json({
+			status: "fail",
+			msg: err.message
+		});
+	}
+};
+
+// Resolve Ticket
+
+exports.resolveTicket = async (req, res) => {
+	try {
+		const user = await User.findById(req.user);
+		if (user.role === "financeManager" && req.body.status == 2) {
+			return res.status(401).json({
+				status: "fail",
+				msg: "You are not authorized to for this action"
+			});
+		}
+		const event = await Event.findByIdAndUpdate(req.params.eventID, { status: req.body.status });
+		if (user.role === "financeManager") {
+			await FinanceReport.create({
+				userID: req.user,
+				eventID: req.params.eventID,
+				comment: req.body.comment,
+				status: req.body.status
+			});
+		} else if (user.role === "governingBody") {
+			await GoverningBodyReport.create({
+				userID: req.user,
+				eventID: req.params.eventID,
+				comment: req.body.comment,
+				status: req.body.status
+			});
+		}
+
+		res.status(201).json({
+			status: "success",
+			data: {
+				event
 			}
 		});
 	} catch (err) {
