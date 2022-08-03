@@ -140,7 +140,11 @@ exports.resolveTicket = async (req, res) => {
 				msg: "You are not authorized to for this action"
 			});
 		}
-		const event = await Event.findByIdAndUpdate(req.params.eventID, { status: req.body.status });
+		const event = await Event.findByIdAndUpdate(
+			req.params.eventID,
+			{ status: req.body.status },
+			{ new: true }
+		);
 		if (user.role === "financeManager") {
 			await FinanceReport.create({
 				userID: req.user,

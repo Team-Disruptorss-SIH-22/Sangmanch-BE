@@ -14,9 +14,8 @@ const schema = mongoose.Schema({
 		required: true
 	},
 	status: {
-		type: Boolean,
-		required: true,
-		default: false
+		type: Number,
+		required: true
 	},
 	AIFlag: {
 		type: Boolean,
