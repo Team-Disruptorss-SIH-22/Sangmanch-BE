@@ -5,7 +5,7 @@ const Email = require("../utils/Email");
 // Create email verification link
 function EmailVerfication(id) {
 	return jwt.sign({ id }, process.env.EMAIL_SECRET, {
-		expiresIn: "600s"
+		expiresIn: "24h"
 	});
 }
 
