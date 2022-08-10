@@ -64,7 +64,7 @@ exports.getUserFromToken = async (req, res) => {
 
 // Signup
 exports.signup = async (req, res) => {
-	const { name, email, password, confirmPassword, role } = req.body;
+	const { licenceID, name, email, password, confirmPassword, role } = req.body;
 
 	let user = await User.findOne({ email });
 	try {
@@ -72,6 +72,7 @@ exports.signup = async (req, res) => {
 			return res.status(400).json({ status: "error", msg: "User already exists" });
 		}
 		user = await User.create({
+			licenceID,
 			name,
 			email,
 			password,
