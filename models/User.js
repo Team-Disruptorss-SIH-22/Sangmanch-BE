@@ -2,7 +2,14 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const schema = mongoose.Schema({
-	name: String,
+	licenceID: {
+		type: String,
+		required: [true, "Please provide a licence ID"]
+	},
+	name: {
+		type: String,
+		required: [true, "Please provide your name"]
+	},
 	email: {
 		type: String,
 		required: [true, "Please provide an email"],
