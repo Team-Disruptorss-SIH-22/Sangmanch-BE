@@ -14,9 +14,11 @@ const schema = mongoose.Schema({
 		required: true
 	},
 	status: {
-		type: Boolean,
+		type: Number,
 		required: true,
-		default: false
+		// { Rejected, Pending, Forwarded, Approved }
+		enum: [-1, 0, 1, 2],
+		default: 0
 	}
 });
 
