@@ -12,7 +12,7 @@ const schema = mongoose.Schema({
 	type: {
 		type: String,
 		required: true,
-		enum: ["scholarship", "festival", "seminar", "languageFest", "CulturalFest", "exhibition"]
+		enum: ["scholarship", "festival", "seminar", "languageFest", "culturalFest", "exhibition"]
 	},
 	date: {
 		type: Date,
