@@ -18,7 +18,7 @@ const schema = mongoose.Schema({
 	password: {
 		type: String,
 		required: [true, "Please provide a password"],
-		minlength: 8,
+		minLength: 8,
 		select: false
 	},
 	confirmPassword: {
@@ -39,6 +39,17 @@ const schema = mongoose.Schema({
 	confirm: {
 		type: Boolean,
 		default: false
+	},
+	pin: {
+		type: Number,
+		min: 0000,
+		max: 9999,
+		required: [
+			function () {
+				return this.role !== "ICCRUser";
+			},
+			"Please provide a pin"
+		]
 	}
 });
 

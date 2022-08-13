@@ -64,20 +64,22 @@ exports.getUserFromToken = async (req, res) => {
 
 // Signup
 exports.signup = async (req, res) => {
-	const { licenceID, name, email, password, confirmPassword, role } = req.body;
+	let { licenceID, name, email, password, confirmPassword, role, pin } = req.body;
 
 	let user = await User.findOne({ email });
 	try {
 		if (user) {
 			return res.status(400).json({ status: "error", msg: "User already exists" });
 		}
+		if (role === "ICCRUser") pin = undefined;
 		user = await User.create({
 			licenceID,
 			name,
 			email,
 			password,
 			confirmPassword,
-			role
+			role,
+			pin
 		});
 		const token = getToken(user.id);
 		// Confirm Email Token
