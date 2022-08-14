@@ -140,6 +140,12 @@ exports.resolveTicket = async (req, res) => {
 				msg: "You are not authorized to for this action"
 			});
 		}
+		if (user.pin !== req.body.pin) {
+			return res.status(401).json({
+				status: "fail",
+				msg: "Please Enter Correct Pin"
+			});
+		}
 		const event = await Event.findByIdAndUpdate(
 			req.params.eventID,
 			{ status: req.body.status },
