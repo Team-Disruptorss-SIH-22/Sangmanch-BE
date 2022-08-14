@@ -44,6 +44,7 @@ const schema = mongoose.Schema({
 		type: Number,
 		min: 0000,
 		max: 9999,
+		select: false,
 		required: [
 			function () {
 				return this.role !== "ICCRUser";

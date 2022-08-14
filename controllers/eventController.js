@@ -133,7 +133,7 @@ exports.getEventsOfLoggedUser = async (req, res) => {
 
 exports.resolveTicket = async (req, res) => {
 	try {
-		const user = await User.findById(req.user);
+		const user = await User.findById(req.user).select("+pin");
 		if (user.role === "financeManager" && req.body.status == 2) {
 			return res.status(401).json({
 				status: "fail",
