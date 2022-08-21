@@ -38,7 +38,7 @@ exports.protect = async (req, res, next) => {
 };
 
 // Only for certain roles
-exports.roles = (roles) => {
+exports.roles = (...roles) => {
 	return async (req, res, next) => {
 		const user = await User.findById(req.user);
 		if (!roles.includes(user.role)) {
