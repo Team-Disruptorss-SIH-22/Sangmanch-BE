@@ -38,8 +38,8 @@ const schema = mongoose.Schema({
 	status: {
 		type: Number,
 		required: true,
-		// { Rejected, Pending, Forwarded, Approved }
-		enum: [-1, 0, 1, 2],
+		// { Rejected By GB, Rejected By FM, Pending, Forwarded, Approved }
+		enum: [-2, -1, 0, 1, 2],
 		default: 0
 	},
 	forwardToGA: {
