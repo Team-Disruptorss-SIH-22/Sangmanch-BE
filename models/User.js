@@ -33,7 +33,7 @@ const schema = mongoose.Schema({
 	},
 	role: {
 		type: String,
-		enum: ["ICCRUser", "financeManager", "governingBody", "generalAssembly"],
+		enum: ["ICCRUser", "financeManager", "governingBody", "generalAssembly", "DG", "OL1", "OL2"],
 		required: true
 	},
 	confirm: {

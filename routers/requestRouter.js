@@ -13,13 +13,9 @@ Router.use(authController.protect);
 
 Router.get("/", roles("ICCRUser"), getRequestsOfLoggedUser);
 Router.get("/:id").get(getRequestByID);
-Router.get("/all", roles("financeManager", "governingBody", "generalAssembly"), getAllRequest);
+Router.get("/all", roles("DG", "OL1", "OL2"), getAllRequest);
 
 Router.post("/", roles("ICCRUser"), createRequest);
-Router.patch(
-	"/resolve/:eventID",
-	roles("financeManager", "governingBody", "generalAssembly"),
-	resolveRequest
-);
+Router.patch("/resolve/:eventID", roles("DG", "OL1", "OL2"), resolveRequest);
 
 module.exports = Router;

@@ -93,7 +93,7 @@ exports.getRequestsOfLoggedUser = async (req, res) => {
 exports.resolveRequest = async (req, res) => {
 	try {
 		const user = await User.findById(req.user).select("+pin");
-		if (user.role === "OL1" && req.body.status == 2) {
+		if (user.role === "DG" && req.body.status == 2) {
 			return res.status(401).json({
 				status: "fail",
 				msg: "You are not authorized for this action"

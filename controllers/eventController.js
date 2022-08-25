@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Event = require("../models/Event");
 const User = require("../models/User");
 const FinanceReport = require("../models/FinanceReport");
@@ -171,6 +172,31 @@ exports.resolveTicket = async (req, res) => {
 			status: "success",
 			data: {
 				event
+			}
+		});
+	} catch (err) {
+		console.log(err.message);
+		res.status(400).json({
+			status: "fail",
+			msg: err.message
+		});
+	}
+};
+
+// Get Comments of Event
+exports.getCommentsOfEvent = async (req, res) => {
+	try {
+		let comments = [];
+		const comm1 = await FinanceReport.find({
+			eventID: mongoose.Types.ObjectId(req.params.eventID)
+		});
+		console.log(comm1);
+		comments.push((await FinanceReport.find({ eventID: req.params.eventID })).comment);
+		comments.push((await GoverningBodyReport.find({ eventID: req.params.eventID })).comment);
+		res.status(200).json({
+			status: "success",
+			data: {
+				comments
 			}
 		});
 	} catch (err) {

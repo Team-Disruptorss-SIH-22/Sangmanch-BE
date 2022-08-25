@@ -7,7 +7,8 @@ const {
 	getAllEvents,
 	getEventByID,
 	getEventsOfLoggedUser,
-	resolveTicket
+	resolveTicket,
+	getCommentsOfEvent
 } = require("../controllers/eventController");
 
 Router.use(protect);
@@ -15,6 +16,7 @@ Router.use(protect);
 Router.get("/", roles("ICCRUser"), getEventsOfLoggedUser);
 Router.get("/:id").get(getEventByID);
 Router.get("/all", roles("financeManager", "governingBody", "generalAssembly"), getAllEvents);
+Router.get("/comments/:eventID", getCommentsOfEvent);
 
 Router.post("/", roles("ICCRUser"), upload.single("invoice"), createEvent);
 Router.patch(
