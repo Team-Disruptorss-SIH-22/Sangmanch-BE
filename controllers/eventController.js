@@ -195,3 +195,38 @@ exports.getCommentsOfEvent = async (req, res) => {
 		});
 	}
 };
+
+exports.getFilteredData = async (req, res) => {
+	try {
+		const { search, country, type, month } = req.query;
+		const regex = new RegExp(search || "", "gi");
+
+		let params = {};
+		if (search) params.name = regex;
+		if (country) params.country = country;
+		if (type) params.type = type;
+		let events = await Event.find(params);
+		if (month) {
+			events = events.filter((event) => new Date(event.date).getMonth() + 1 === parseInt(month));
+		}
+
+		const budget = events.reduce((acc, curr) => acc + curr.budget, 0);
+		const expenses = events.reduce((acc, curr) => acc + curr.expenses, 0);
+		const peopleReached = events.reduce((acc, curr) => acc + curr.peopleReached, 0);
+
+		res.status(200).json({
+			status: "success",
+			data: {
+				events,
+				budget,
+				expenses,
+				peopleReached
+			}
+		});
+	} catch (err) {
+		res.status(400).json({
+			status: "fail",
+			msg: err.message
+		});
+	}
+};

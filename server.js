@@ -6,6 +6,7 @@ const authRouter = require("./routers/authRouter");
 const eventRouter = require("./routers/eventRouter");
 const requestRouter = require("./routers/requestRouter");
 const dashboardRouter = require("./routers/dashboardRouter");
+const alumniRouter = require("./routers/alumniRouter");
 const { cloudinaryConfig } = require("./utils/Upload");
 
 const app = express();
@@ -18,6 +19,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/event", eventRouter);
 app.use("/api/request", requestRouter);
 app.use("/api/dashboard", dashboardRouter);
+app.use("/api/alumni", alumniRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

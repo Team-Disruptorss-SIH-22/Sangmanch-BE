@@ -8,7 +8,8 @@ const {
 	getEventByID,
 	getEventsOfLoggedUser,
 	resolveTicket,
-	getCommentsOfEvent
+	getCommentsOfEvent,
+	getFilteredData
 } = require("../controllers/eventController");
 
 Router.use(protect);
@@ -24,5 +25,6 @@ Router.patch(
 	roles("financeManager", "governingBody", "generalAssembly"),
 	resolveTicket
 );
+Router.get("/filter", getFilteredData);
 
 module.exports = Router;
