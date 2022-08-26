@@ -187,12 +187,8 @@ exports.resolveTicket = async (req, res) => {
 exports.getCommentsOfEvent = async (req, res) => {
 	try {
 		let comments = [];
-		const comm1 = await FinanceReport.find({
-			eventID: mongoose.Types.ObjectId(req.params.eventID)
-		});
-		console.log(comm1);
-		comments.push((await FinanceReport.find({ eventID: req.params.eventID })).comment);
-		comments.push((await GoverningBodyReport.find({ eventID: req.params.eventID })).comment);
+		comments.push((await FinanceReport.find({ eventID: req.params.eventID }))?.[0]?.comment);
+		comments.push((await GoverningBodyReport.find({ eventID: req.params.eventID }))?.[0]?.comment);
 		res.status(200).json({
 			status: "success",
 			data: {
