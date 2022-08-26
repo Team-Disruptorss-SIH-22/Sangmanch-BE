@@ -33,7 +33,6 @@ exports.createEvent = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -45,7 +44,6 @@ exports.updateEvent = async (req, res) => {
 	try {
 		const { id, name, type, date, peopleReached, expenses, budget, city, country, status } =
 			req.body;
-		console.log(userID);
 		// Get Cloudinary Link for Invoice
 		// const invoice = await cloudinaryLink(req.file.path).url;
 		const event = await Event.findByIdAndUpdate(id, {
@@ -68,7 +66,6 @@ exports.updateEvent = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -86,7 +83,6 @@ exports.getAllEvents = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -104,7 +100,6 @@ exports.getEventByID = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -122,7 +117,6 @@ exports.getEventsOfLoggedUser = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -175,7 +169,6 @@ exports.resolveTicket = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -196,7 +189,6 @@ exports.getCommentsOfEvent = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message

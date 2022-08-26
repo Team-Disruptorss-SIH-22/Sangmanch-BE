@@ -28,7 +28,6 @@ exports.createRequest = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -46,7 +45,6 @@ exports.getAllRequest = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -64,7 +62,6 @@ exports.getRequestByID = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -82,7 +79,6 @@ exports.getRequestsOfLoggedUser = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message
@@ -127,7 +123,6 @@ exports.resolveRequest = async (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({
 			status: "fail",
 			msg: err.message

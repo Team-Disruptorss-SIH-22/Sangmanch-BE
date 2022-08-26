@@ -32,7 +32,6 @@ exports.protect = async (req, res, next) => {
 		req.user = decoded.id;
 		next();
 	} catch (err) {
-		console.log(err.message);
 		res.status(401).json({ status: "fail", msg: err.message });
 	}
 };
@@ -57,7 +56,6 @@ exports.getUserFromToken = async (req, res) => {
 		const user = await User.findById(req.user).select("-password");
 		res.json({ status: "success", data: { user } });
 	} catch (err) {
-		console.error(err.message);
 		res.status(500).json({ status: "fail", msg: "Server Error" });
 	}
 };
@@ -91,7 +89,6 @@ exports.signup = async (req, res) => {
 		await new Email(user, url).verifyEmail();
 		res.status(201).json({ status: "success", data: { user, token } });
 	} catch (err) {
-		console.log(err.message);
 		res.status(400).json({ status: "fail", msg: err.message });
 	}
 };
