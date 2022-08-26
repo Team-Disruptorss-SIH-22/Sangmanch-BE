@@ -4,7 +4,7 @@ const RequestReport = require("../models/RequestReport");
 exports.createRequest = async (req, res) => {
 	try {
 		const userID = req.user;
-		const { title, requirements, description, budget, date, status, address, city, country } =
+		const { title, requirements, description, budget, date, status, address, city, country, link } =
 			req.body;
 		const request = await Request.create({
 			userID,
@@ -17,7 +17,8 @@ exports.createRequest = async (req, res) => {
 			status,
 			address,
 			city,
-			country
+			country,
+			link
 		});
 
 		res.status(201).json({
@@ -107,14 +108,14 @@ exports.resolveRequest = async (req, res) => {
 		}
 		const newComment = { text: req.body.comment, userID: req.user };
 		const request = await Request.findByIdAndUpdate(
-			req.params.eventID,
+			req.params.requestID,
 			{ status: req.body.status, $push: { comments: newComment } },
 			{ new: true }
 		);
 
 		await RequestReport.create({
 			userID: req.user,
-			eventID: req.params.eventID,
+			requestID: req.params.requestID,
 			comment: req.body.comment,
 			status: req.body.status
 		});

@@ -42,6 +42,7 @@ const schema = mongoose.Schema(
 			type: String,
 			required: true
 		},
+		link: String,
 		status: {
 			type: Number,
 			required: true,
